@@ -62,6 +62,20 @@ const Sidebar = ({ user, closeToggle }) => {
           ))}
         </div>
       </div>
+      {user && (
+        <Link
+          className="flex my-4 mb-3 items-center justify-center bg-white rounded-lg shadow-lg mx-2 p-1"
+          to={`user-profile/${user._id}`}
+          onClick={handleCloseSlidbar}
+        >
+          <img
+            src={user.image}
+            alt="profile"
+            className="w-10 h-10 rounded-full"
+          />
+          <p>{user.userName}</p>
+        </Link>
+      )}
     </div>
   );
 };

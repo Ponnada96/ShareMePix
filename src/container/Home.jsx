@@ -34,10 +34,11 @@ const Home = () => {
 
   return (
     <div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
+      {/* Desktop sidebar */}
       <div className="hidden md:flex h-screen flex-initial">
-        {/* Mobile sidebar */}
         <Sidebar user={user && user} />
       </div>
+      {/* Mobile sidebar */}
       <div className="flex md:hidden flex-row">
         <div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
           <HiMenu
@@ -60,7 +61,6 @@ const Home = () => {
                 className="cursor-pointer"
                 onClick={() => settoggleSidebar(false)}
               />
-              {/* Desktop sidebar */}
             </div>
             <Sidebar user={user && user} closeToggle={settoggleSidebar} />
           </div>
