@@ -3,20 +3,25 @@ import { HiMenu } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Sidebar, UserProfile } from "../components/index.js";
 import Pins from "./Pins";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { client } from "../client.js";
 import { userQuery } from "../utils/data.js";
+import { fetchUser } from "../utils/fetchUser.js";
 
 const Home = () => {
   const [toggleSidebar, settoggleSidebar] = useState(false);
   const [user, setUser] = useState(null);
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
+  const userInfo = fetchUser();
 
-  const userInfo =
-    localStorage.getItem("user") !== undefined
-      ? JSON.parse(localStorage.getItem("user"))
-      : localStorage.clear();
+  useEffect(() => {
+    const user = fetchUser();
+    if (user == null) {
+      navigate("/login", { replace: true });
+    }
+  }, []);
 
   useEffect(() => {
     console.log(userInfo?.sub);
