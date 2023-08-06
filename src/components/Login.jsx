@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 import jwt_decod from "jwt-decode";
 import { client } from "../client";
+import { fetchUser } from "../utils/fetchUser";
 
 const Login = () => {
   const navigate = useNavigate();
   // est
+
   const responseGoogle = (credentialResponse) => {
     const response = jwt_decod(credentialResponse.credential);
     localStorage.setItem("user", JSON.stringify(response));
