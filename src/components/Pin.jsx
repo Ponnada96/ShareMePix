@@ -18,11 +18,14 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user.sub)
     ?.length;
 
+  console.log("alreadySaved", alreadySaved);
+
   const deletePin = (id) => {
     client.delete(id).then(() => {
       window.location.reload();
     });
   };
+
   const savePin = (id) => {
     console.log("alreadySaved", alreadySaved);
     if (!alreadySaved) {
@@ -106,9 +109,9 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   className="bg-white flex text-black items-center gap-2 font-bold p-2 px-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
                 >
                   <BsFillArrowUpRightCircleFill />
-                  {destination?.length > 20
-                    ? destination?.slice(8, 20)
-                    : destination?.slice(8)}
+                  {destination?.length > 15
+                    ? `${destination?.slice(8, 18)}...`
+                    : destination}
                 </a>
               )}
               {postedBy._id === user.sub && (
@@ -116,7 +119,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    // deletePin(_id)
+                    deletePin(_id);
                   }}
                   className="bg-white text-gray-700 opacity-70 hover:opacity-100 font-bold px-2 py-2 text-base rounded-full hover:shadow-lg outline-none"
                 >
