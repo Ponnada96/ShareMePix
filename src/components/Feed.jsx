@@ -27,6 +27,10 @@ const Feed = () => {
   }, [categoryId]);
 
   if (isLoading) return <Spinner message="Adding new ideas to your feed!" />;
+  if (!pins?.length)
+    return (
+      <h2 className="font-bold text-xl text-center mt-2">No Pins available</h2>
+    );
   return <div>{pins && <MansorynLayout pins={pins} />}</div>;
 };
 
