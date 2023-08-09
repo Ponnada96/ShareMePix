@@ -18,14 +18,11 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user.sub)
     ?.length;
 
-  console.log("alreadySaved", alreadySaved);
-
   const deletePin = (id) => {
     client.delete(id).then(() => {
       window.location.reload();
     });
   };
-
   const savePin = (id) => {
     console.log("alreadySaved", alreadySaved);
     if (!alreadySaved) {
