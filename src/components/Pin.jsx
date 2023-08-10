@@ -8,15 +8,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { fetchUser } from "../utils/fetchUser";
 
 const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
-  console.log("_id", _id);
   const navigate = useNavigate();
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setsavingPost] = useState(false);
   const user = fetchUser();
 
-  console.log("user.googleId", user);
-  const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user.sub)
-    ?.length;
+  const alreadySaved = !!save?.filter(
+    (item) => item.postedBy?._id === user?.sub
+  )?.length;
 
   const deletePin = (id) => {
     client.delete(id).then(() => {
@@ -24,7 +23,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
     });
   };
   const savePin = (id) => {
-    console.log("alreadySaved", alreadySaved);
     if (!alreadySaved) {
       setsavingPost(true);
       client
@@ -33,10 +31,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         .insert("after", "save[-1]", [
           {
             _key: uuidv4(),
-            userId: user.sub,
+            userId: user?.sub,
             postedBy: {
               _type: "postedBy",
-              _ref: user.sub,
+              _ref: user?.sub,
             },
           },
         ])
@@ -106,12 +104,12 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   className="bg-white flex text-black items-center gap-2 font-bold p-2 px-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
                 >
                   <BsFillArrowUpRightCircleFill />
-                  {destination?.length > 15
-                    ? `${destination?.slice(8, 18)}...`
+                  {destination?.length > 8
+                    ? `${destination?.slice(0, 8)}...`
                     : destination}
                 </a>
               )}
-              {postedBy._id === user.sub && (
+              {postedBy._id === user?.sub && (
                 <button
                   type="button"
                   onClick={(e) => {

@@ -32,7 +32,8 @@ const UserProfile = () => {
   }, [userId]);
 
   useEffect(() => {
-    if (text === "created") {
+    console.log("text", text);
+    if (text === "Created") {
       const createdPinsQuery = userCreatedPinsQuery(userId);
       client.fetch(createdPinsQuery).then((response) => {
         console.log("createdPinsQuery", response);
@@ -41,6 +42,7 @@ const UserProfile = () => {
     } else {
       const savedPinsQuery = userSavedPinsQuery(userId);
       client.fetch(savedPinsQuery).then((response) => {
+        console.log("savedPinsQuery", response);
         setPins(response);
       });
     }
@@ -57,7 +59,6 @@ const UserProfile = () => {
               src={randomImage}
               alt="banner-pic"
             />
-            {console.log(user)}
             <img
               src={user.image}
               className="w-20 h-20 rounded-full -mt-10"
@@ -87,7 +88,6 @@ const UserProfile = () => {
               <button
                 type="button"
                 onClick={(e) => {
-                  console.log(e.target.textContent);
                   setText(e.target.textContent);
                   setActveBtn("created");
                 }}
@@ -100,7 +100,6 @@ const UserProfile = () => {
               <button
                 type="button"
                 onClick={(e) => {
-                  console.log(e.target.textContent);
                   setText(e.target.textContent);
                   setActveBtn("saved");
                 }}

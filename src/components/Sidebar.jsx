@@ -12,7 +12,6 @@ const Sidebar = ({ user, closeToggle }) => {
     "flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize";
 
   const handleCloseSlidbar = () => {
-    console.log(closeToggle);
     closeToggle && closeToggle(false);
   };
 
@@ -60,7 +59,7 @@ const Sidebar = ({ user, closeToggle }) => {
       </div>
       {user && (
         <Link
-          className="flex my-4 mb-3 items-center justify-center bg-white rounded-lg shadow-lg mx-2 p-1"
+          className="flex my-4 mb-3 items-center justify-center bg-white rounded-lg shadow-lg mx-2 p-2"
           to={`user-profile/${user._id}`}
           onClick={handleCloseSlidbar}
         >
@@ -69,7 +68,7 @@ const Sidebar = ({ user, closeToggle }) => {
             alt="profile"
             className="w-10 h-10 rounded-full"
           />
-          <p>{user.userName}</p>
+          <p className="pl-1">{user.userName}</p>
         </Link>
       )}
     </div>
