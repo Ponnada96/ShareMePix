@@ -16,7 +16,7 @@ const Sidebar = ({ user, closeToggle }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
+    <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar ">
       <div className="flex flex-col">
         <Link
           to="/"
@@ -25,6 +25,7 @@ const Sidebar = ({ user, closeToggle }) => {
         >
           <img src={logo} alt="logo" className="w-full" />
         </Link>
+
         <div className="flex flex-col gap-5">
           <NavLink
             to="/"
@@ -35,9 +36,8 @@ const Sidebar = ({ user, closeToggle }) => {
             <RiHomeFill />
             Home
           </NavLink>
-          <h3 className="mt-3 px-5 text-base 2xl:text-xl">
-            Discovery Categories
-          </h3>
+
+          <h3 className="px-5 text-base 2xl:text-xl">Discovery Categories</h3>
           {categories.slice(0, categories.length - 1).map((category) => (
             <NavLink
               to={`/category/${category.name}`}
@@ -57,20 +57,24 @@ const Sidebar = ({ user, closeToggle }) => {
           ))}
         </div>
       </div>
-      {user && (
-        <Link
-          className="flex my-4 mb-3 items-center justify-center bg-white rounded-lg shadow-lg mx-2 p-2"
-          to={`user-profile/${user._id}`}
-          onClick={handleCloseSlidbar}
+      {/* <div className="flex p-2 ">
+        <NavLink
+          to="/about-devloper"
+          className={({ isActive }) =>
+            isActive ? isActiveStyle : isNotActiveStyle
+          }
         >
-          <img
-            src={user.image}
-            alt="profile"
-            className="w-10 h-10 rounded-full"
-          />
-          <p className="pl-1">{user.userName}</p>
-        </Link>
-      )}
+          About Developer
+        </NavLink>
+      </div> */}
+
+      <Link
+        className="flex my-4 mb-3 items-center justify-center bg-red-200 rounded-lg shadow-lg mx-2 p-2"
+        to={`/about-devloper`}
+        onClick={handleCloseSlidbar}
+      >
+        <p className="pl-1 font-bold text-base">About Developer</p>
+      </Link>
     </div>
   );
 };

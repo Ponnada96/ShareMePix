@@ -8,6 +8,7 @@ import logo from "../assets/logo.png";
 import { client } from "../client.js";
 import { userQuery } from "../utils/data.js";
 import { fetchUser } from "../utils/fetchUser.js";
+import AboutDeveloper from "../components/AboutDeveloper.jsx";
 
 const Home = () => {
   const [toggleSidebar, settoggleSidebar] = useState(false);
@@ -72,6 +73,7 @@ const Home = () => {
         <Routes>
           <Route path="/user-profile/:userId" element={<UserProfile />} />
           <Route path="/*" element={<Pins user={user && user} />} />
+          <Route path="/about-devloper" element={<AboutDeveloper />} />
         </Routes>
       </div>
     </div>
